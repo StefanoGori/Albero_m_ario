@@ -44,9 +44,26 @@ public class Albero_m_ario {
 		
 	}
 	
-	public void addChild(Nodo_m_ario U, int i) {
-		
-		
+	public void newRoot(Nodo_m_ario root,int i) { //sostituisce la radice dell'albero e imposta la vecchia radice come figlia i-esima della nuova radice
+		if(Tree.size()>0){
+		Nodo_m_ario t=Tree.get(0);
+		Tree.set(0, root);
+		root.setChild(t, i);
+		Tree.add(t);
+		}
+		else{
+			System.out.println("l albero è vuoto");
+		}
+	}
+
+	public void preorder(){
+		Nodo_m_ario root=Tree.get(0);
+		if(root!=null){
+			System.out.println(root.getInfo());
+			for(Nodo_m_ario n:root.getChildren()){
+				preorder();
+			}
+		}
 	}
 	
 }
