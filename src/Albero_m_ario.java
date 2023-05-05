@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class Albero_m_ario {
-	
+
 	private int m;
 	private Nodo_m_ario radice;
 
@@ -17,8 +17,17 @@ public class Albero_m_ario {
 		this.radice = null;
 	}
 
-//------------------------Getter e Setter-----------------------------------------------------------------
-	
+	// ------------------------Getter e
+	// Setter-----------------------------------------------------------------
+
+	public int getM() {
+		return m;
+	}
+
+	public void setM(int m) {
+		this.m = m;
+	}
+
 	public String getContenutoNodo(Nodo_m_ario nodo) {
 		return nodo.getInformazione();
 	}
@@ -35,7 +44,7 @@ public class Albero_m_ario {
 		return cercaPadre(radice, nodo);
 	}
 
-//-----------------------------------Metodi-------------------------------------------------------------------------
+	// -----------------------------------Metodi-------------------------------------------------------------------------
 
 	public Nodo_m_ario inserisciRadice(String informazione) {// inserisci radice
 		radice = new Nodo_m_ario(informazione);// salvo l'informazione in un nodo
@@ -51,12 +60,12 @@ public class Albero_m_ario {
 		return V;
 	}
 
-	public Nodo_m_ario inserisciNuovaRadice(String informazione) {// cambio radice
-		if(radice != null){
-		Nodo_m_ario nuovaRadice = new Nodo_m_ario(informazione);// salvo l'informazione in un nodo
-		nuovaRadice.aggiungiFiglio(radice);// aggiungo la vecchia radice come figlio della nuova
-		radice = nuovaRadice;
-		}// la nuova radice diventa la radice dell'albero
+	public Nodo_m_ario inserisciNuovaRadice(String informazione, int i) {// cambio radice
+		if (radice != null) {
+			Nodo_m_ario nuovaRadice = new Nodo_m_ario(informazione);// salvo l'informazione in un nodo
+			nuovaRadice.aggiungiFiglio(radice, i);// aggiungo la vecchia radice come figlio della nuova
+			radice = nuovaRadice;
+		} // la nuova radice diventa la radice dell'albero
 		return radice;
 	}
 
@@ -160,9 +169,10 @@ public class Albero_m_ario {
 		return getLivelloHelper(radice, nodo, 0);// altrimenti richiamo la funzione di supporto
 	}
 
-	// ---------------------------------FUNZIONI DI SUPPORTO--------------------------------------------------
+	// ---------------------------------FUNZIONI DI
+	// SUPPORTO--------------------------------------------------
 
-	private void visitaInProfonditaHelper(Nodo_m_ario nodo, List<String> informazioni) {//supporto visita in profondità
+	private void visitaInProfonditaHelper(Nodo_m_ario nodo, List<String> informazioni) {// supporto visita in profondità
 		if (nodo != null) { // se il nodo non è vuoto
 			informazioni.add(nodo.getInformazione());// aggiungo l'informazione alla lista
 			for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
