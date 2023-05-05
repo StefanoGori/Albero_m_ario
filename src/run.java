@@ -1,134 +1,36 @@
 //Nome e cognome: Stefano Gori Matricola: 7113622
 //Nome e cognome: Michele Coppi Matricola: 7113252
 //Nome e cognome: Niccolò Saggese Matricola: 7113328
-import java.util.ArrayList;
+
 import java.util.List;
+
 public class run {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Albero_m_ario Albero=new Albero_m_ario(3);
-		Nodo_m_ario Nodo=new Nodo_m_ario("ciao",new ArrayList<Nodo_m_ario>() {{
-            add(new Nodo_m_ario("bella", null));
-            add(new Nodo_m_ario("buongiorno", null));
-        }});	
-		Nodo_m_ario Nodo2=new Nodo_m_ario("ciao2",null);
-		Nodo_m_ario Nodo3=new Nodo_m_ario("ciao3",null);
-		
-		Albero.addRoot(Nodo);
-		ArrayList<Nodo_m_ario> tree = Albero.getTree();
-		Albero.newRoot(Nodo2, 2);
-		Albero.newRoot(Nodo3,1);
-		Albero.preorder();
-		System.out.println(tree.size());
-		for (int i = 0; i < tree.size(); i++) {
-			System.out.println(tree.get(i).getInfo());
-		}
-<<<<<<< HEAD
-		
-=======
+		System.setProperty("file.encoding", "UTF-8");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		Albero_m_ario albero = new Albero_m_ario(3);
+		Albero_m_ario albero = new Albero_m_ario(5);
 
 		Nodo_m_ario radice = albero.inserisciRadice("A");
 		Nodo_m_ario nodoB = albero.inserisciNuovoNodo(radice, "B", 1);
 		Nodo_m_ario nodoC = albero.inserisciNuovoNodo(radice, "C", 2);
 		Nodo_m_ario nodoD = albero.inserisciNuovoNodo(radice, "D", 3);
 
-		albero.inserisciNuovoNodo(nodoB, "E", 1);
+		Nodo_m_ario nodoE = albero.inserisciNuovoNodo(nodoB, "E", 1);
+		
 		albero.inserisciNuovoNodo(nodoB, "F", 2);
-
+		albero.inserisciNuovoNodo(nodoE, "P", 1);
 		albero.inserisciNuovaRadice("X");
+	
+		radice = albero.getRadice();
+        
 
 		albero.inserisciNuovoNodo(albero.getRadice(), "Y", 2);
+		albero.inserisciNuovoNodo(nodoD, "H", 1);
 
-		System.out.println("Informazioni dell'albero:");
-		albero.stampaInformazioni();
 
 		List<String> visitaProfondita = albero.visitaInProfondita();
-		System.out.println("Visita in profonditĂ : " + visitaProfondita);
+		System.out.println("Visita in profondit\u00E0: " + visitaProfondita);
 
 		List<String> visitaLivelli = albero.visitaPerLivelli();
 		System.out.println("Visita per livelli: " + visitaLivelli);
@@ -145,7 +47,7 @@ public class run {
 		String contenutoNodo = albero.getContenutoNodo(nodoB);
 		System.out.println("Contenuto del nodo B: " + contenutoNodo);
 
-		albero.setContenutoNodo(nodoB, "B-modificato");
+		albero.setContenutoNodo(nodoB, "K");
 		System.out.println("Contenuto del nodo B dopo la modifica: " + nodoB.getInformazione());
 
 		Nodo_m_ario radiceAlbero = albero.getRadice();
@@ -162,8 +64,5 @@ public class run {
 
 		int livelloNodoD = albero.getLivello(nodoD);
 		System.out.println("Livello del nodo D: " + livelloNodoD);
-
->>>>>>> 3347b308cf9c8044c027cefa3a459572a36eebc6
 	}
-
 }

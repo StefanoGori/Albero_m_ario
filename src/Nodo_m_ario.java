@@ -1,216 +1,21 @@
 //Nome e cognome: Stefano Gori Matricola: 7113622
 //Nome e cognome: Michele Coppi Matricola: 7113252
 //Nome e cognome: Niccolò Saggese Matricola: 7113328
-import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Nodo_m_ario {
 	
-	private String info; //informazione nodo
-	private ArrayList<Nodo_m_ario> Children=new ArrayList<Nodo_m_ario>(); //figli del nodo
-	
-	public Nodo_m_ario(String info, ArrayList<Nodo_m_ario> children) {
-		this.info = info;
-		Children = children;
-	}
-
-	//Getter e Setter
-	public String getInfo() {
-		return info;
-	}
-	public void setInfo(String info) {
-		this.info = info;
-	}
-
-	public void setChild(Nodo_m_ario v, int i) {
-		if (i < Children.size()) {
-			Children.set(i, v);
-		} else {
-			while (Children.size() < i) {
-				Children.add(null);
-			}
-			Children.add(v);
-		}
-	}
-	
-	
-
-	public ArrayList<Nodo_m_ario> getChildren() {
-		return Children;
-	}
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	private String informazione;
+	private String informazione; 
 	private List<Nodo_m_ario> figli;
 
-	public Nodo_m_ario(String informazione) {
+	public Nodo_m_ario(String informazione) {//costruttore
 		this.informazione = informazione;
 		this.figli = new ArrayList<>();
 	}
+
+	//-----------------------------Getter e Setter------------------------------------------------------------
 
 	public String getInformazione() {
 		return informazione;
@@ -223,6 +28,8 @@ public class Nodo_m_ario {
 	public List<Nodo_m_ario> getFigli() {
 		return figli;
 	}
+
+//-----------------------------Metodi-------------------------------------------------------------------
 
 	public void aggiungiFiglio(Nodo_m_ario figlio) {
 		figli.add(figlio);
@@ -242,19 +49,18 @@ public class Nodo_m_ario {
 		return count;
 	}
 
-	public List<String> getInformazioniFigliInterni() {
-		List<String> informazioni = new ArrayList<>();
-		for (Nodo_m_ario figlio : figli) {
-			if (!figlio.isFoglia()) {
-				informazioni.add(figlio.getInformazione());
+	public List<String> getInformazioniFigliInterni() {//restituisce le informazioni dei figli interni
+		List<String> informazioni = new ArrayList<>();//crea una lista di stringhe
+		for (Nodo_m_ario figlio : figli) {//per ogni figlio
+			if (!figlio.isFoglia()) {//se non è una foglia
+				informazioni.add(figlio.getInformazione());//aggiunge l'informazione alla lista
 			}
 		}
 		return informazioni;
 	}
 
-	public boolean isFoglia() {
-		return figli.isEmpty();
+	public boolean isFoglia() {//controlla se il nodo è una foglia
+		return figli.isEmpty();//se la lista dei figli è vuota ritorna true
 	}
-	
-	
+
 }
