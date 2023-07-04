@@ -9,21 +9,23 @@ public class run {
 	public static void main(String[] args) {
 		System.setProperty("file.encoding", "UTF-8");
 
-		Albero_m_ario albero = new Albero_m_ario(5);
+		Albero_m_ario albero = new Albero_m_ario(6);
 
 		Nodo_m_ario radice = albero.inserisciRadice("A");
 		Nodo_m_ario nodoB = albero.inserisciNuovoNodo(radice, "B", 1);
 		Nodo_m_ario nodoC = albero.inserisciNuovoNodo(radice, "C", 2);
-		Nodo_m_ario nodoD = albero.inserisciNuovoNodo(radice, "D", 1);
+		Nodo_m_ario nodoD = albero.inserisciNuovoNodo(radice, "D", 3);
 		Nodo_m_ario nodoE = albero.inserisciNuovoNodo(radice, "E", 4);
-		Nodo_m_ario nodoF = albero.inserisciNuovoNodo(radice, "K", 5);
-		Nodo_m_ario nodoG = albero.inserisciNuovoNodo(radice, "P", 6);
+		Nodo_m_ario nodoF = albero.inserisciNuovoNodo(radice, "F", 5);
+		Nodo_m_ario nodoG = albero.inserisciNuovoNodo(radice, "G", 6);
+
+		Nodo_m_ario nodoH = albero.inserisciNuovoNodo(nodoB, "H", 4);
 		albero.inserisciNuovaRadice("X", 1);
 
 		radice = albero.getRadice();
 
 		albero.inserisciNuovoNodo(albero.getRadice(), "Y", 2);
-		albero.inserisciNuovoNodo(nodoD, "H", 1);
+		albero.inserisciNuovoNodo(nodoD, "Z", 1);
 
 		List<String> visitaProfondita = albero.visitaInProfondita();
 		System.out.println("Visita in profondit\u00E0: " + visitaProfondita);

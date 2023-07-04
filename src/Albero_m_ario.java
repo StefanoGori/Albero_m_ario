@@ -9,18 +9,17 @@ import java.util.Queue;
 
 public class Albero_m_ario {
 
-	private int m;
+	private static int m;
 	private Nodo_m_ario radice;
 
 	public Albero_m_ario(int m) { // costruttore
-		this.m = m;
+		Albero_m_ario.m = m;
 		this.radice = null;
 	}
 
-	// ------------------------Getter e
-	// Setter-----------------------------------------------------------------
+	// ------------------------Getter e Setter-----------------------------------------------------------------
 
-	public int getM() {
+	public static int getM() {
 		return m;
 	}
 
@@ -52,10 +51,22 @@ public class Albero_m_ario {
 	}
 
 	public Nodo_m_ario inserisciNuovoNodo(Nodo_m_ario U, String informazione, int i) {// inserimento nuovo nodo
-		Nodo_m_ario V = new Nodo_m_ario(informazione);// salvo l'informazione in un nodo
-		List<Nodo_m_ario> figli = U.getFigli();// crea una lista di figli del nodo padre
-		if (i >= 1 && i <= figli.size() + 1) {// se l'indice è compreso tra 1 e il numero di figli + 1
-			figli.add(i - 1, V);// aggiunge il nuovo nodo alla lista dei figli
+		int M=U.getM(); //prendo l'arietà dell'albero
+		if(i<1|| i>M){ //controllo che l'indice sia valido
+			System.out.println("Errore: impossibile aggiungere il figlio");
+			return null;
+		}
+		Nodo_m_ario V=new Nodo_m_ario(informazione);
+		List<Nodo_m_ario> figli=U.getFigli();
+
+		if(i<figli.size()){
+			figli.add(i-1,V);
+		}
+		else{
+			while(figli.size()<i-1){
+				figli.add(null);
+			}
+			figli.add(V);
 		}
 		return V;
 	}
@@ -83,10 +94,12 @@ public class Albero_m_ario {
 
 			while (!coda.isEmpty()) {// finchè la coda non è vuota
 				Nodo_m_ario nodo = coda.poll();// estraggo il primo elemento della coda
-				informazioni.add(nodo.getInformazione());// aggiungo l'informazione alla lista
-
-				for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
-					coda.offer(figlio);// aggiungo il figlio alla coda
+				if(nodo!=null)
+					informazioni.add(nodo.getInformazione());// aggiungo l'informazione alla lista
+				if(nodo!=null){
+					for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
+						coda.offer(figlio);// aggiungo il figlio alla coda
+					}
 				}
 			}
 		}
@@ -169,8 +182,7 @@ public class Albero_m_ario {
 		return getLivelloHelper(radice, nodo, 0);// altrimenti richiamo la funzione di supporto
 	}
 
-	// ---------------------------------FUNZIONI DI
-	// SUPPORTO--------------------------------------------------
+	// ---------------------------------FUNZIONI DI SUPPORTO--------------------------------------------------
 
 	private void visitaInProfonditaHelper(Nodo_m_ario nodo, List<String> informazioni) {// supporto visita in profondità
 		if (nodo != null) { // se il nodo non è vuoto
@@ -183,17 +195,21 @@ public class Albero_m_ario {
 
 	private int getNumeroNodiInterniHelper(Nodo_m_ario nodo) {// supporto numero nodi interni
 		int count = 0;// contatore
-
-		for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
-			count += figlio.isFoglia() ? 0 : 1;// se il figlio è una foglia non incremento il contatore, altrimenti
-												// incremento di 1
-			count += getNumeroNodiInterniHelper(figlio);// richiamo ricorsivamente la funzione
+		if(nodo!=null){
+			for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
+				if(figlio!=null){
+					count += figlio.isFoglia() ? 0 : 1;// se il figlio è una foglia non incremento il contatore, altrimenti incremento di 1
+					count += getNumeroNodiInterniHelper(figlio);// richiamo ricorsivamente la funzione
+				}
+			}
 		}
-
 		return count;
 	}
 
 	private int getNumeroFoglieHelper(Nodo_m_ario nodo) {// supporto numero foglie
+		if(nodo==null){
+			return 0;
+		}
 		if (nodo.isFoglia()) {// se il nodo è una foglia ritorna 1
 			return 1;
 		}
@@ -208,19 +224,22 @@ public class Albero_m_ario {
 	}
 
 	private int getAltezzaHelper(Nodo_m_ario nodo) {// supporto altezza
-		if (nodo.isFoglia()) {// se il nodo è una foglia ritorna 0
-			return 0;
-		}
-
-		int altezzaMax = 0;// altezza massima
-		for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
-			int altezzaFiglio = getAltezzaHelper(figlio);// richiamo ricorsivamente la funzione
-			if (altezzaFiglio > altezzaMax) {// se l'altezza del figlio è maggiore dell'altezza massima
-				altezzaMax = altezzaFiglio;// l'altezza massima diventa l'altezza del figlio
+		if(nodo !=null){
+			if (nodo.isFoglia()) {// se il nodo è una foglia ritorna 0
+				return 0;
 			}
-		}
 
-		return altezzaMax + 1;
+			int altezzaMax = 0;// altezza massima
+			for (Nodo_m_ario figlio : nodo.getFigli()) {// per ogni figlio del nodo
+				int altezzaFiglio = getAltezzaHelper(figlio);// richiamo ricorsivamente la funzione
+				if (altezzaFiglio > altezzaMax) {// se l'altezza del figlio è maggiore dell'altezza massima
+					altezzaMax = altezzaFiglio;// l'altezza massima diventa l'altezza del figlio
+				}
+			}
+			return altezzaMax + 1;
+		}
+		return 0;
+
 	}
 
 	private int getLivelloHelper(Nodo_m_ario radice, Nodo_m_ario nodo, int livello) {// supporto livello

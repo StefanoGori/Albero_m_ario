@@ -4,6 +4,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Nodo_m_ario {
 
@@ -16,8 +17,7 @@ public class Nodo_m_ario {
 		this.figli = new ArrayList<>();
 	}
 
-	// -----------------------------Getter e
-	// Setter------------------------------------------------------------
+	// -----------------------------Getter e Setter------------------------------------------------------------
 
 	public String getInformazione() {
 		return informazione;
@@ -33,11 +33,26 @@ public class Nodo_m_ario {
 
 	// -----------------------------Metodi-------------------------------------------------------------------
 
+	public int getM(){
+		return Albero_m_ario.getM();
+	}
+
+
+
 	public void aggiungiFiglio(Nodo_m_ario figlio, int i) {
-		if (figli.get(i) != null || i > albero.getM()) {
-			System.out.println("Errore: impossibile aggiungere il figlio");
-		} else {
-			figli.add(i, figlio);
+		try{
+			if(i<=Albero_m_ario.getM()|| figli.get(i)==null){
+				figli.add(i-1,figlio);
+			}
+			else{
+				System.out.println("Errore: impossibile aggiungere il figlio");
+			}
+		}
+		catch(IndexOutOfBoundsException e){
+			for(int k=0;k<i;k++){
+				figli.add(null);
+			}
+			figli.add(i-1,figlio);
 		}
 	}
 
@@ -66,7 +81,11 @@ public class Nodo_m_ario {
 	}
 
 	public boolean isFoglia() {// controlla se il nodo è una foglia
-		return figli.isEmpty();// se la lista dei figli è vuota ritorna true
+		if(this!=null)
+			return figli.isEmpty();// se la lista dei figli è vuota ritorna true
+		return true;
 	}
+
+	
 
 }
